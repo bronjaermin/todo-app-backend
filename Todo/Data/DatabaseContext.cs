@@ -6,6 +6,7 @@ namespace Todo.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Todo> Todos { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
         public DatabaseContext(DbContextOptions options) : base(options)
         {

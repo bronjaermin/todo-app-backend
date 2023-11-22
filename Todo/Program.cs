@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ITodoService, TodoService>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
