@@ -19,6 +19,12 @@ namespace Todo.Services
             await _databaseContext.SaveChangesAsync();
         }
 
+        public async Task DeleteTodoAsync(Item todo)
+        {
+            _databaseContext.Items.Remove(todo);
+            await _databaseContext.SaveChangesAsync();
+        }
+
         public async Task<List<Item>> GetAllAsync()
         {
             return await _databaseContext.Items.Include(x => x.Categories).Include(x => x.User).ToListAsync();

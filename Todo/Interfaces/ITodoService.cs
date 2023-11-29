@@ -8,5 +8,6 @@ namespace Todo.Interfaces
         Task<Item> GetByIdAsync(int id);
         Task CreateTodo(Item todo);
         Task UpdateTodoAsync(Item todo);
+        Task DeleteTodoAsync(Item todo);
     }
 }

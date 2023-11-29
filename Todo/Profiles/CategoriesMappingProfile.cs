@@ -9,6 +9,7 @@ namespace Todo.Profiles
         public CategoriesMappingProfile()
         {
             CreateMap<Category, CategoryResponseDTO>();
+            CreateMap<CategoryRequestDTO, Category>();
         }
     }
 }
