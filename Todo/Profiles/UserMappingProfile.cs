@@ -9,6 +9,7 @@ namespace Todo.Profiles
         public UserMappingProfile()
         {
             CreateMap<User, UserResponseDTO>();
+            CreateMap<RegisterUserRequestDTO, User>();
         }
     }
 }
