@@ -10,5 +10,6 @@ namespace Todo.Interfaces
         Task AddUserToRole(User user);
         Task RegisterUser(User user);
         Task CreateRole(UserRole role);
+        Task<User?> GetUserByUsername(string username);
     }
 }

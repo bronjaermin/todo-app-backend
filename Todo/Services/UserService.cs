@@ -83,5 +83,8 @@ namespace Todo.Services
             await _databaseContext.UserRole.AddAsync(role);
             await _databaseContext.SaveChangesAsync();
         }
+
+        public async Task<User?> GetUserByUsername(string username) =>
+            await _databaseContext.Users.Where(x => x.UserName == username).FirstOrDefaultAsync();
     }
 }

@@ -28,7 +28,13 @@ namespace Todo.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserRequestDTO request)
         {
+            var userExist = await _userService.GetUserByUsername(request.UserName);
 
+            if (userExist is not null)
+                return BadRequest(new ErrorResponseDTO
+                {
+                    Message = "User already exist"
+                });
 
             var user = _mapper.Map<User>(request);
             user.Password = _userService.HashPassword(request.Password);
@@ -47,6 +53,32 @@ namespace Todo.Controllers
             {
                 Token = token,
                 User = _mapper.Map<UserResponseDTO>(user)
+            });
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUser([FromBody]LoginUserRequestDTO request)
+        {
+            var userExist = await _userService.GetUserByUsername(request.UserName);
+
+            if (userExist is null)
+                return NotFound(new ErrorResponseDTO
+                {
+                    Message = "User not registered in app"
+                });
+
+            if (userExist.Password != _userService.HashPassword(request.Password))
+                return BadRequest(new ErrorResponseDTO
+                {
+                    Message = "Wrong password!"
+                });
+
+            var token = _userService.GenerateToken(userExist);
+
+            return Ok(new AuthResponseDTO
+            {
+                Token = token,
+                User = _mapper.Map<UserResponseDTO>(userExist)
             });
         }
     }
