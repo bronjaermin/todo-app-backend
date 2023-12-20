@@ -21,7 +21,6 @@ namespace Todo.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             var todos = await _todoService.GetAllAsync();
